@@ -19,6 +19,7 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
+        Assertions.assertTrue(true, "Entering false value will fail the test");
     }
 
     @Test
@@ -30,7 +31,6 @@ class DemoApplicationTests {
         URI uri = new URI(url);
 
         ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
-        Assertions.assertTrue(false);
         Assertions.assertEquals(200, result.getStatusCodeValue());
     }
 }
