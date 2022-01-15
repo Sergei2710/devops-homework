@@ -29,7 +29,6 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5  
       with:
         image: 22101989/devops-homework
-        tags: v1, latest
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
