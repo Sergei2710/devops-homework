@@ -53,7 +53,10 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           
       - name: Remove previose server
-        run: doctl compute droplet get
+        run: doctl compute droplet get weather-server
+        
+      - name: Remove previose server
+        run: doctl compute droplet get weather-server-2
         
       - name: Remove previose server
         run: doctl compute droplet delete weather-server-2 -f
