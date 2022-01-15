@@ -25,12 +25,13 @@ public class WeatherService {
 
     private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID={key}&units=metric";
 
-    @Value("${api.openweathermap.key}")
-    private String apiKey;
-    @Value("${api.openweathermap.city}")
-    private String city;
-    @Value("${app.is.everything.ok}")
-    private boolean isEverythingOk;
+    //@Value("${api.openweathermap.key}")
+    private String apiKey = "e62c043849c576e2cccfc248c3fef08e";
+    //@Value("${api.openweathermap.city}")
+    private String city = "Miskolc";
+    //@Value("${app.is.everything.ok}")
+    private boolean isEverythingOk = true;
+
 
 
     private final RestTemplate restTemplate;
@@ -50,6 +51,8 @@ public class WeatherService {
         }
 
         URI url = new UriTemplate(WEATHER_URL).expand(city, "hu", apiKey);
+        System.out.println("SERGEI" + city);
+        System.out.println("SERGEI" + apiKey);
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
         return convert(response);
     }
