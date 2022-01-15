@@ -63,6 +63,7 @@ jobs:
         run: | 
           doctl compute droplet delete weather-server -f
           doctl compute droplet create weather-server --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
+          exit 0
       
     
         
