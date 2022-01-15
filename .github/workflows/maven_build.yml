@@ -53,8 +53,10 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           
       - name: Remove previose server
-        env:
-          MY_ENV_VAR: ${{ doctl compute droplet get weather-server-2 }}
+        run: doctl compute droplet get
+        
+      - name: Remove previose server
+        run: doctl compute droplet delete weather-server-2 -f
         
       - name: Provision Droplet and Deploy container
         run: doctl compute droplet create weather-server-2 --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
