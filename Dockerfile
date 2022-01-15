@@ -1,8 +1,8 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk:8
 
 EXPOSE 8080
 
-WORKDIR /usr/app
-ADD target/demo-*.jar /demo.jar
 
-ENTRYPOINT ["java", "-jar", "demo.jar"]
+ADD target/devops-homework.jar devops-homework.jar
+
+ENTRYPOINT ["java", "-jar", "/devops-homework.jar"]
