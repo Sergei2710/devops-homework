@@ -52,16 +52,18 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           
-      - name: Remove previose server
+      #To make sure that application always available
+      - name: Check if server exist
         run: doctl compute droplet get weather-server
         
-      - name: Remove previose server
-        run: doctl compute droplet get weather-server-2
+      - name: Create weather-server if NOT exist
+        if: ${{ failure() }}
+        run: doctl compute droplet create weather-server --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait      
         
       - name: Remove previose server
-        run: doctl compute droplet delete weather-server-2 -f
+        run: doctl compute droplet delete weather-server -f
         
       - name: Provision Droplet and Deploy container
-        run: doctl compute droplet create weather-server-2 --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
+        run: doctl compute droplet create weather-server --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
     
         
