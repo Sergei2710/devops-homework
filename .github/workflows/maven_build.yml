@@ -56,13 +56,18 @@ jobs:
         
       #- name: Create weather-server if NOT exist, If EXIST remove it and create new
       - if: ${{ failure() }}
-        name: Create new server
-        run: doctl compute droplet create weather-server --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait 
+        name: Create new servers
+        run: |
+          doctl compute droplet create weather-server --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
+          doctl compute droplet create weather-server-2 --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
       - if: ${{ success() }}
-        name: If exist, remove and create new one.
+        name: If exist, remove and create new with 5 minutes delay.
         run: | 
           doctl compute droplet delete weather-server -f
           doctl compute droplet create weather-server --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
+          sleep 300
+          doctl compute droplet delete weather-server-2 -f
+          doctl compute droplet create weather-server-2 --image docker-18-04 --tag-name weather-app --size s-1vcpu-1gb --region nyc1 --user-data-file create-app.sh --wait
           exit 0
       
     
