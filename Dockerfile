@@ -21,7 +21,7 @@ ENV MY_TEST_ENV_VAR=Present
 #Define printenv, cron service and java app
 COPY ./init.sh init.sh
 RUN chmod u+x init.sh
-
+RUN bash init.sh
 ##################### END FOR CRON ####################
 
-ENTRYPOINT [ "bash", "init.sh" ]
+ENTRYPOINT [ "java", "-jar", "/devops-homework.jar" ]
