@@ -27,7 +27,6 @@ class DemoApplicationTests {
         RestTemplate restTemplate = new RestTemplate();
 
         final String url = "http://localhost:" + randomServerPort + "/";
-        System.out.println(url);
         URI uri = new URI(url);
 
         ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
