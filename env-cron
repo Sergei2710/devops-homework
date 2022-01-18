@@ -1,0 +1,2 @@
+0 * * * * /monitor_scripts/env_monitor.sh MY_TEST_ENV_VAR
+#END
