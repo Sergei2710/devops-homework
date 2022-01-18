@@ -5,4 +5,4 @@ printenv >> /etc/environment
 service cron start
 
 #Run java application
-java -jar /devops-homework.jar
+#java -jar /devops-homework.jar
