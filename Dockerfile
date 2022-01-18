@@ -25,5 +25,3 @@ RUN chmod u+x init.sh
 ##################### END FOR CRON ####################
 
 ENTRYPOINT [ "bash", "init.sh" ]
-
-ENTRYPOINT ["java", "-jar", "/devops-homework.jar"]
